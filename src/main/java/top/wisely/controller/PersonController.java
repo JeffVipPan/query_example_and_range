@@ -36,7 +36,7 @@ public class PersonController {
     }
 
 
-    @GetMapping
+    @GetMapping("/query")
     public ResponseEntity<Page<Person>> query(Person person,
                                               @DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate,
                                               @DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate,

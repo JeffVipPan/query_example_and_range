@@ -1,13 +1,13 @@
 
 spring:
   jpa:
-    database: POSTGRESQL
+    database: MySQL
     show-sql: true
     hibernate:
       ddl-auto: update
   datasource:
-    platform: postgres
-    url: jdbc:postgresql://192.168.1.140:5432/person
-    username: wang
-    password: yunfei
-    driver-class-name: org.postgresql.Driver
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/users
+    username: root
+    password: password
+    driver-class-name: com.mysql.jdbc.Driver
