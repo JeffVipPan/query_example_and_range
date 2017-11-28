@@ -29,7 +29,7 @@ public class PersonController {
     @Autowired
     PersonRepository personRepository;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Person> save(@RequestBody Person person){
         Person p = personRepository.save(person);
         return new ResponseEntity<Person>(p, HttpStatus.CREATED);
