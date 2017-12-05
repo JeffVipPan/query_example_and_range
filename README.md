@@ -7,3 +7,6 @@
 
 - 1:将Date类型改为 Java 8 LocalDate 类型
 - 2:审计字段测试成功 @CreatedBy ...
+
+-修改审计字段为父类，这样就不需要每个字段都加这个字段
+- 父类需要加@MappedSuperclass
