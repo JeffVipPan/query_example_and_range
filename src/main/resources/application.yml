@@ -5,9 +5,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+      format-sql: true
   datasource:
     platform: mysql
     url: jdbc:mysql://localhost:3306/users?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: password
-    driver-class-name: com.mysql.jdbc.Driver
+logging.level.org.springframework.security: debug

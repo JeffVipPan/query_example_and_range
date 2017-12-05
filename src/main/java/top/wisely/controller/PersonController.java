@@ -30,7 +30,7 @@ public class PersonController {
     PersonRepository personRepository;
 
     @PostMapping("/save")
-    public ResponseEntity<Person> save(@RequestBody Person person){
+    public ResponseEntity<Person> save(@RequestBody Person person) {
         Person p = personRepository.save(person);
         return new ResponseEntity<Person>(p, HttpStatus.CREATED);
     }
@@ -38,22 +38,30 @@ public class PersonController {
 
     @GetMapping("/query")
     public ResponseEntity<Page<Person>> query(Person person,
-                                              @DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate,
-                                              @DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate,
+                                              @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                              @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
                                               Integer startHeight,
                                               Integer endHeight,
-                                              Pageable pageable){
+                                              Pageable pageable) {
         Example<Person> personExample = Example.of(person);
 
         List<Range<Person>> ranges = newArrayList();
-        Range<Person> birthRange = new Range<Person>("birthday",startDate,endDate);
-        Range<Person> heightRange = new Range<Person>("height",startHeight,endHeight);
+        Range<Person> birthRange = new Range<Person>("birthday", startDate, endDate);
+        Range<Person> heightRange = new Range<Person>("height", startHeight, endHeight);
         ranges.add(birthRange);
         ranges.add(heightRange);
 
-        Page<Person> page = personRepository.queryByExampleWithRange(personExample,ranges,pageable);
+        Page<Person> page = personRepository.queryByExampleWithRange(personExample, ranges, pageable);
 
-        return new ResponseEntity<Page<Person>>(page,HttpStatus.OK);
+        return new ResponseEntity<Page<Person>>(page, HttpStatus.OK);
 
     }
+
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Person> delete(@RequestParam(value = "id") Long id) {
+        personRepository.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
