@@ -1,10 +1,9 @@
 package top.wisely.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import top.wisely.domain.Order;
 import top.wisely.repository.CustomerRepository;
 import top.wisely.repository.OrderRepository;
@@ -27,6 +26,15 @@ public class OrderController {
     public Order addOrder(@RequestBody Order order) {
         Order order1 = orderRepository.save(order);
         return order1;
+    }
+
+    @PutMapping(value = "orders/{id}")
+    public ResponseEntity changeOrder(@PathVariable Integer id) {
+        Order order = orderRepository.findOne(id);
+        order.setName("李四");
+        orderRepository.save(order);
+        System.out.println(order.toString());
+        return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
 
