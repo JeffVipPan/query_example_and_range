@@ -18,6 +18,7 @@ import static org.springframework.data.jpa.domain.Specifications.where;
 public class WiselyRepositoryImpl<E, PK extends Serializable> extends SimpleJpaRepository<E, PK> implements
         WiselyRepository<E, PK> {
     private final EntityManager entityManager;
+    private String hello;
 
     public WiselyRepositoryImpl(JpaEntityInformation entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
@@ -31,6 +32,28 @@ public class WiselyRepositoryImpl<E, PK extends Serializable> extends SimpleJpaR
         Specification<E> byExample = new ByExampleSpecification<>(example);
         Specification<E> byRanges = new ByRangeSpecification<>(ranges);
         return findAll(where(byExample).and(byRanges),pageable);
+    }
+
+    public void foo() {
+        pullDateFromDb();
+
+        validate();
+
+        getResult();
+    }
+
+    private void getResult() {
+        System.out.println("hello");
+    }
+
+    private void pullDateFromDb() {
+        System.out.println(hello);
+        getResult();
+    }
+
+    private void validate() {
+        getResult();
+        getResult();
     }
 
 
