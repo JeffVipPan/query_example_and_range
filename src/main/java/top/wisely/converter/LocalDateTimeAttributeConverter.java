@@ -17,15 +17,11 @@ public class LocalDateTimeAttributeConverter implements AttributeConverter<Local
         return (locDateTime == null ? null : Timestamp.valueOf(locDateTime));
     }
 
-    public void h() {
-        System.out.println("2");
-    }
     @Override
     public LocalDateTime convertToEntityAttribute(Timestamp sqlTimestamp) {
         return (sqlTimestamp == null ? null : sqlTimestamp.toLocalDateTime());
     }
 
-    private int age;
 
 
 }
