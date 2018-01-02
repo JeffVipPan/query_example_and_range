@@ -38,7 +38,6 @@ public class Order extends BaseAuditingDomain {
         this.age = age;
     }
 
-    private final static String AGE  = "20";
 
 
 }
