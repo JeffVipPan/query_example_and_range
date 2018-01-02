@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import top.wisely.domain.Order;
 import top.wisely.domain.Person;
 import top.wisely.repository.PersonRepository;
 import top.wisely.repository.support.Range;
@@ -62,6 +63,10 @@ public class PersonController {
     public ResponseEntity<Person> delete(@RequestParam(value = "id") Long id) {
         personRepository.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public void syso() {
+        new Order("zhang");
     }
 
 }
