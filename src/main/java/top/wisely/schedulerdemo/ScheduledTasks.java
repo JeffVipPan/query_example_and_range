@@ -18,13 +18,11 @@ public class ScheduledTasks {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
 
-
     public void scheduleTaskWithInitialDelay() {
     }
 
     public void scheduleTaskWithCronExpression() {
     }
-
 
     public ScheduledTasks() {
     }
