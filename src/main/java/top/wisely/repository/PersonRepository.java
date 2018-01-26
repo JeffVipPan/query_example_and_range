@@ -3,6 +3,7 @@ package top.wisely.repository;
 
 import org.springframework.stereotype.Repository;
 import top.wisely.domain.Person;
+import top.wisely.domain.projection.PersonProjection;
 import top.wisely.repository.support.WiselyRepository;
 
 /**
@@ -12,6 +13,8 @@ import top.wisely.repository.support.WiselyRepository;
 @Repository
 public interface PersonRepository extends WiselyRepository<Person,Long> {
 
-    public void deleteById(Long id);
+     void deleteById(Long id);
+
+    PersonProjection findById(Long id);
 
 }

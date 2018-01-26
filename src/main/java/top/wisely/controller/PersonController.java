@@ -1,6 +1,5 @@
 package top.wisely.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -9,8 +8,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import top.wisely.domain.Order;
 import top.wisely.domain.Person;
+import top.wisely.domain.projection.PersonProjection;
 import top.wisely.repository.PersonRepository;
 import top.wisely.repository.support.Range;
 
@@ -19,16 +18,14 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-
-/**
- * Created by wangyunfei on 2017/6/6.
- */
+/** 
+* @author: 潘峰
+* @date: 26/01/2018 4:37 PM*/
 @RestController
 @RequestMapping("/people")
 public class PersonController {
 
-    @Autowired
-    PersonRepository personRepository;
+    @Autowired PersonRepository personRepository;
 
     @PostMapping("/save")
     public ResponseEntity<Person> save(@RequestBody Person person) {
@@ -36,14 +33,14 @@ public class PersonController {
         return new ResponseEntity<Person>(p, HttpStatus.CREATED);
     }
 
-
     @GetMapping("/query")
-    public ResponseEntity<Page<Person>> query(Person person,
-                                              @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-                                              @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-                                              Integer startHeight,
-                                              Integer endHeight,
-                                              Pageable pageable) {
+    public ResponseEntity<Page<Person>> query(
+            Person person,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            Integer startHeight,
+            Integer endHeight,
+            Pageable pageable) {
         Example<Person> personExample = Example.of(person);
 
         List<Range<Person>> ranges = newArrayList();
@@ -52,21 +49,23 @@ public class PersonController {
         ranges.add(birthRange);
         ranges.add(heightRange);
 
-        Page<Person> page = personRepository.queryByExampleWithRange(personExample, ranges, pageable);
+        Page<Person> page =
+                personRepository.queryByExampleWithRange(personExample, ranges, pageable);
 
         return new ResponseEntity<Page<Person>>(page, HttpStatus.OK);
-
     }
 
+    @GetMapping("/find")
+    public PersonProjection delete(@RequestParam(value = "id") Long id) {
+        PersonProjection projection = personRepository.findById(id);
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<Person> delete(@RequestParam(value = "id") Long id) {
-        personRepository.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        System.out.println(
+                projection.getHeight()
+                        + ","
+                        + projection.getName()
+                        + ","
+                        + projection.getNameAndHeight());
+
+        return projection;
     }
-
-    public void syso() {
-        new Order("zhang");
-    }
-
 }

@@ -16,7 +16,6 @@ import java.util.Set;
 @Table(name = "jpa_Order")
 public class Order extends BaseAuditingDomain {
 
-    private final String age;
     @Id
     @GeneratedValue
     @Column(name = "order_id")
@@ -30,13 +29,6 @@ public class Order extends BaseAuditingDomain {
 
     @OneToMany
     private Set<OrderItem> items = new HashSet<>();
-    private String eye;
-
-
-    public Order(String age) {
-        super();
-        this.age = age;
-    }
 
 
 

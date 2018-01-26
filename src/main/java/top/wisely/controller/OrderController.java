@@ -1,5 +1,6 @@
 package top.wisely.controller;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class OrderController {
         return order1;
     }
 
+    @ApiOperation(value = "获取用户列表", notes = "")
     @PutMapping(value = "orders/{id}")
     public ResponseEntity changeOrder(@PathVariable Integer id) {
         Order order = orderRepository.findOne(id);
@@ -36,6 +38,4 @@ public class OrderController {
         System.out.println(order.toString());
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
-
-
 }
