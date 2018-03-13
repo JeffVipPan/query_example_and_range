@@ -12,20 +12,26 @@ import top.wisely.domain.Person;
 import top.wisely.domain.projection.PersonProjection;
 import top.wisely.repository.PersonRepository;
 import top.wisely.repository.support.Range;
+import top.wisely.service.PersonService;
 
 import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-/** 
-* @author: 潘峰
-* @date: 26/01/2018 4:37 PM*/
+/**
+ * @author: 潘峰
+ * @date: 26/01/2018 4:38 PM
+ */
 @RestController
 @RequestMapping("/people")
 public class PersonController {
 
-    @Autowired PersonRepository personRepository;
+    @Autowired
+    PersonRepository personRepository;
+
+    @Autowired
+    private PersonService personService;
 
     @PostMapping("/save")
     public ResponseEntity<Person> save(@RequestBody Person person) {
@@ -68,4 +74,20 @@ public class PersonController {
 
         return projection;
     }
+
+
+    @GetMapping("/unCommit")
+    public ResponseEntity<Person> unCommit(@RequestParam(value = "id") Long id) {
+        return new ResponseEntity<Person>(personService.unCommit(id), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/findid")
+    public List<Long> findid(@RequestParam(value = "name") String name) {
+        List<Long> idByName = personRepository.findIdByName(name);
+        return idByName;
+    }
+
+
+
 }
