@@ -5,10 +5,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import top.wisely.domain.Customer;
-import top.wisely.domain.Order;
-import top.wisely.repository.CustomerRepository;
-import top.wisely.repository.OrderRepository;
+import top.jeffpan.domain.Customer;
+import top.jeffpan.domain.Order;
+import top.jeffpan.repository.CustomerRepository;
+import top.jeffpan.repository.OrderRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -10,3 +10,7 @@
 
 -修改审计字段为父类，这样就不需要每个字段都加这个字段
 - 父类需要加@MappedSuperclass
+
+- 通过jackson-datatype-jsr310解决LocalDate是数组问题
+- 返回值为    "localDate": "2010-10-12"
+
